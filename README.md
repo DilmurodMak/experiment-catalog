@@ -1,12 +1,20 @@
 # Experiment Catalog
 
-A comprehensive tool for cataloging, comparing, and analyzing experiment results. The Experiment Catalog enables teams to track evaluation runs across projects, compare metrics against baselines, and identify performance regressions or improvements in AI/ML experimentation workflows.
+A comprehensive tool for cataloging, comparing, and analyzing experiment results. Experiment Catalog enables teams to track evaluation runs across projects, compare metrics against baselines, and identify performance regressions or improvements in AI and ML experimentation workflows.
 
-[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/plasne/experiment-catalog/badge)](https://scorecard.dev/viewer/?uri=github.com/plasne/experiment-catalog)
+## Project status
+
+The repository is under active development. Support for Microsoft products and services used by this repository does not extend to the repository itself. See [SUPPORT.md](./SUPPORT.md) for the current support model and [SECURITY.md](./SECURITY.md) for vulnerability reporting guidance.
+
+## Community
+
+- Read [CONTRIBUTING.md](./CONTRIBUTING.md) before opening a pull request.
+- This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com).
+- Review [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md), [SUPPORT.md](./SUPPORT.md), and [SECURITY.md](./SECURITY.md) for repository expectations.
 
 ## Overview
 
-The Experiment Catalog is designed for teams running iterative experiments—particularly useful for AI evaluation pipelines where you need to:
+The Experiment Catalog is designed for teams running iterative experiments, particularly AI evaluation pipelines where you need to:
 
 - Track results across multiple evaluation runs
 - Compare experiment metrics against established baselines
@@ -189,3 +197,13 @@ The evaluator is a .NET console application that can run inference and evaluatio
 ## Evaluation Example
 
 You can find an example evaluation script in the [evaluation](./evaluation) directory.
+
+## Telemetry
+
+Experiment Catalog supports optional telemetry export for the catalog and evaluator services through the `OPEN_TELEMETRY_CONNECTION_STRING` environment variable. Telemetry is disabled by default. To keep telemetry turned off, do not set `OPEN_TELEMETRY_CONNECTION_STRING` for either service.
+
+**Data Collection**. The software may collect information about you and your use of the software and send it to Microsoft. Microsoft may use this information to provide services and improve our products and services. You may turn off the telemetry as described in the repository. There are also some features in the software that may enable you and Microsoft to collect data from users of your applications. If you use these features, you must comply with applicable law, including providing appropriate notices to users of your applications together with a copy of Microsoft's privacy statement. Our privacy statement is located at <https://go.microsoft.com/fwlink/?LinkID=824704>. You can learn more about data collection and use in the help documentation and our privacy statement. Your use of the software operates as your consent to these practices.
+
+## Trademarks
+
+**Trademarks** This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft trademarks or logos is subject to and must follow [Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general). Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship. Any use of third-party trademarks or logos is subject to those third-party's policies.

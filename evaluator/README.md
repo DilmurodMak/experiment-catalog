@@ -1,6 +1,8 @@
 # Evaluator
 
-This solution focuses on how we complete the following activities necessary for an evaluation:
+## Evaluation workflow
+
+This service focuses on how the following activities are completed for an evaluation:
 
 1. [USER] Establish the ground truth.
 1. [USER] User kicks off an evaluation.
@@ -16,11 +18,11 @@ The __EVALUATOR__ will require using an account with the following permissions:
 - __Storage Blob Data Contributor__: Allows the account to read/write blobs to Azure Blob Storage.
 - __Storage Queue Data Contributor__: Allows the account to read/write messages in Azure Storage Queues.
 
-Any __INFERENCE__ service could be used, but a complete implementation can be found here: <https://github.com/plasne/llmbot-solution-accel/tree/main/sk>. It will require using an account with the following permissions:
+Any inference service can be used as long as it can process inference jobs from the configured queue and write outputs to the referenced blob locations. It will require using an account with the following permissions:
 
 - __Storage Queue Data Contributor__: Allows the account to read/write messages in Azure Storage Queues.
 
-Any __EVALUATION__ service could be used, but a sample script can be found here: <https://github.com/plasne/experiment-catalog/tree/main/evaluation>. It will require using an account with the following permissions:
+Any evaluation worker can be used. This repository includes an example implementation in [../evaluation](../evaluation/README.md). It will require using an account with the following permissions:
 
 - __Storage Queue Data Reader__: Allows the account to read messages in Azure Storage Queues.
 
@@ -69,7 +71,7 @@ ground_truth: >
 
 ## User kicks off an evaluation
 
-This portion of the pipeline uses the [evaluator service](https://github.com/plasne/experiment-catalog/tree/main/evaluator). The evaluator service requires at least one pair of matching queues: one for inference and one for evaluation. The queues should be in an Azure Storage Account and be named "QueueName-inference" and "QueueName-evaluation", respectively.
+This portion of the pipeline uses the evaluator service in this directory. The evaluator service requires at least one pair of matching queues: one for inference and one for evaluation. The queues should be in an Azure Storage Account and be named "QueueName-inference" and "QueueName-evaluation", respectively.
 
 To find out what queue pairs are being identified by the evaluator service, you can query the evaluator service's API:
 
@@ -80,7 +82,7 @@ curl -i http://localhost:6030/api/queues
 To kick off an evaluation, you can post a JSON payload to the evaluator service's API like so:
 
 ```bash
-curl -i -X POST -H "Content-Type: application/json" -d '{ "project": "project-01", "experiment": "experiment-000", "set": "may-01-a", "iterations": 2 }' http://localhost:6030/api/queues/pelasne
+curl -i -X POST -H "Content-Type: application/json" -d '{ "project": "project-01", "experiment": "experiment-000", "set": "may-01-a", "iterations": 2 }' http://localhost:6030/api/queues/<queue-name>
 ```
 
 To further understand this example:
@@ -105,9 +107,9 @@ When the user kicks off the evaluation, the evaluator service will enqueue the i
 
 ```json
 {
-  "ground_truth_uri": "https://stpelasneai8330507663733.blob.core.windows.net/ground-truth/q1.json?sv=2...D",
-  "inference_uri": "https://stpelasneai8330507663733.blob.core.windows.net/inference/74e4c7c3-bd72-4def-b21c-477098e87d83-q1.json?sv=2...D",
-  "evaluation_uri": "https://stpelasneai8330507663733.blob.core.windows.net/evaluation/74e4c7c3-bd72-4def-b21c-477098e87d83-q1.json?sv=2...D",
+  "ground_truth_uri": "https://<storage-account>.blob.core.windows.net/ground-truth/q1.json?<sas-token>",
+  "inference_uri": "https://<storage-account>.blob.core.windows.net/inference/<run-id>-q1.json?<sas-token>",
+  "evaluation_uri": "https://<storage-account>.blob.core.windows.net/evaluation/<run-id>-q1.json?<sas-token>",
   "project": "project-01",
   "experiment": "experiment-000",
   "ref": "q1",

@@ -108,7 +108,7 @@ The UI for the catalog is written in Svelte in the [ui](../ui) folder. Generally
 cd ui
 npm install
 npm run build
-cp -r dist/* ../api/wwwroot/
+cp -r dist/* ../catalog/wwwroot/
 ```
 
 ## Create a project
@@ -194,7 +194,7 @@ curl -i "http://localhost:6010/api/projects/project-example/experiments/experime
 If you want to annotate a set you could do it like this...
 
 ```bash
-curl -i -X POST -d '{ "set": "alpha", "annotations": [ { "text": "commit 3746hf", "uri": "https://dev.azure.com/commit" } ] }' -H "Content-Type: application/json" http://localhost:6010/api/projects/project-01/experiments/pelasne-01/results
+curl -i -X POST -d '{ "set": "alpha", "annotations": [ { "text": "commit 3746hf", "uri": "https://dev.azure.com/commit" } ] }' -H "Content-Type: application/json" http://localhost:6010/api/projects/project-01/experiments/experiment-01/results
 ```
 
 In that example, the commit number is being annotated so that the user could get back to the same code and configuration to repeat the experiment.
